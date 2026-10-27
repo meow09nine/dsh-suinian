@@ -1,0 +1,42 @@
+# 碎念 suinian —— agent 主动给用户发 QQ 消息
+#
+# ⚠ 三项必填（详见 README）：
+#   appId / appSecret：QQ 开放平台机器人凭据
+#   openId：接收主动消息的用户的 c2c openid（从 bot 收到的消息里取）
+#
+# 💡 不想手改？跑 `node setup.mjs` 用交互式向导生成本文件。
+#
+# ⚠ 格式：新行必须用 `- insert:` 包裹。
+#   写 `- id: xxx` 是「覆盖已存在的行」，不存在的行会被跳过（patch: entry not found）。
+- insert:
+    - id: suinian
+      name: 'dsh-suinian'
+      config:
+        # ── 必填 ──
+        appId: 'YOUR_APPID'
+        appSecret: 'YOUR_APPSECRET'
+        openId: 'YOUR_C2C_OPENID'
+
+        # ── 可选：发送窗口与节奏 ──
+        startHour: 8              # 每天从几点开始（小时）
+        endHour: 24               # 每天到几点结束（小时）
+        windowMinutes: 120        # 窗口长度（分钟）
+        minPerWindow: 3           # 每个窗口最少几次
+        maxPerWindow: 4           # 每个窗口最多几次
+        minGapMinutes: 21         # 全局最小间隔（分钟）——跨窗口也管，防连发
+        linesPerPoint: [2, 4]     # 每次唤醒连发几条（注入 prompt 的 {lines}）
+        catchupMinutes: 20        # 过期窗口（分钟）——错过的点超过这个时长不补发
+        maxPerDay: 40             # 每日上限
+
+        # ── 可选：事件触发（用户长时间不说话 → 主动问候）──
+        idleHours: 3              # 超过几小时没说话触发
+        idleCooldownMs: 7200000   # 触发后的冷却（毫秒，默认 2 小时）
+        maxIdlePerDay: 3          # 每天最多问候几次
+
+        # ── 可选：会话与提示词 ──
+        wakePreset: ''            # 要唤醒的会话预设 id；留空 = 任意会话
+        checkMs: 60000            # 检查间隔（毫秒）
+        # promptText: |-
+        #   [heartbeat] 现在是随机时间点。请主动给用户发消息，可连发 {lines} 条……
+        # idlePromptText: |-
+        #   [idle] 用户已经好几个小时没来互动了……

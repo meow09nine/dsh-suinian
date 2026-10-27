@@ -1,0 +1,38 @@
+{
+  "name": "dsh-suinian",
+  "version": "0.2.0",
+  "description": "碎念 suinian：DSH agent 主动给用户发 QQ 消息（随机心跳 + 事件触发 + qq_send 工具）",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./index.js": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "setup.mjs",
+    "selfcheck.mjs",
+    "README.md"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "qq",
+    "qqbot",
+    "proactive",
+    "heartbeat"
+  ],
+  "author": "上若拾梦 (Finnley_evokia)",
+  "homepage": "https://github.com/meow09nine/dsh-suinian"
+}
